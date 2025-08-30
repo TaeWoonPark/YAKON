@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YAKON(Your Active Knowledge Organic Nutrition) 腸活ナビ- 質問ページ</title>
+</head>
+
+<body>
+<h1>腸活ナビ 質問ページ</h1>
+</body>
+
+<from method="POST" action="/result">
+    {% for q in questions %}
+    <div>
+        <p><strong>{{ q.ruestion }}</strong><p>
+        {% for option in q.options %} 
+        <label>
+            <input type="radio" name="q{{loop.index }}" value="{{ option.value}}" required>
+            {{ option.text }}
+        </label><br>
+        {% endfor %}
+        button type="submit">ナビする</button>
+    </form>
+<body>
+
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>腸活タイプナビ - 質問</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: white;
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .question-container {
+            padding: 40px;
+        }
+
+        .question {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question h2 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #e3f2fd;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: block;
+            width: 100%;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .question-container {
+                padding: 20px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .question h2 {
+                font-size: 1.2rem;
+            }
+
+            .option {
+                padding: 15px;
+            }
+
+            .option label {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>腸活タイプナビ</h1>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="question-container">
+            <a href="/" class="back-btn">← トップに戻る</a>
+
+            <form id="diagnosis-form">
+                {% for q in questions %}
+                <div class="question" id="question-{{ q.id }}" style="display: none;">
+                    <h2>{{ q.question }}</h2>
+                    <div class="options">
+                        {% for option in q.options %}
+                        <div class="option" onclick="selectOption(this, {{ loop.index0 }}, {{ q.id }})">
+                            <input type="radio" name="q{{ q.id }}" value="{{ loop.index0 }}" id="q{{ q.id }}-{{ loop.index0 }}">
+                            <label for="q{{ q.id }}-{{ loop.index0 }}">{{ option.text }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <button type="button" class="submit-btn" id="submit-btn" onclick="submitAnswers()" disabled>
+                    チェック結果を見る
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 0;
+        const questions = {{ questions | tojson | safe }};
+        const answers = new Array(questions.length).fill(null);
+
+        console.log('=== 初期化開始 ===');
+        console.log('質問数:', questions.length);
+        console.log('質問データ:', questions);
+        console.log('回答配列:', answers);
+        console.log('最初の質問ID:', questions[0].id);
+        console.log('最後の質問ID:', questions[questions.length - 1].id);
+        console.log('=== 初期化完了 ===');
+
+        // 最初の質問を表示
+        showQuestion(0);
+        updateProgress();
+
+        function showQuestion(index) {
+            console.log('=== showQuestion 開始 ===');
+            console.log('引数 index:', index);
+            console.log('質問数:', questions.length);
+            console.log('質問配列:', questions);
+            console.log('現在の質問インデックス:', currentQuestionIndex);
+
+            // インデックスの範囲チェック
+            if (index < 0 || index >= questions.length) {
+                console.error('エラー: インデックスが範囲外です:', index);
+                return;
+            }
+
+            // すべての質問を非表示
+            questions.forEach((q, i) => {
+                const element = document.getElementById(`question-${q.id}`);
+                if (element) {
+                    element.style.display = 'none';
+                    console.log(`質問${q.id}を非表示にしました`);
+                } else {
+                    console.error(`エラー: 質問${q.id}の要素が見つかりません`);
+                }
+            });
+
+            // 現在の質問を表示（インデックスベースで正しく表示）
+            const currentQuestion = questions[index];
+            const elementToShow = document.getElementById(`question-${currentQuestion.id}`);
+
+            if (elementToShow) {
+                elementToShow.style.display = 'block';
+                currentQuestionIndex = index;
+                console.log('表示する質問:', currentQuestion);
+                console.log('質問ID:', currentQuestion.id);
+                console.log('質問テキスト:', currentQuestion.question);
+                console.log('質問インデックス:', index);
+            } else {
+                console.error(`エラー: 質問${currentQuestion.id}の要素が見つかりません`);
+                return;
+            }
+
+            // プログレスバーを更新
+            updateProgress();
+
+            console.log('プログレスバー更新完了');
+            console.log('=== showQuestion 完了 ===');
+
+            // 回答済みかチェック
+            checkAllAnswered();
+        }
+
+        function selectOption(optionElement, optionIndex, questionId) {
+            console.log('=== selectOption 開始 ===');
+            console.log('選択されたオプション:', optionIndex);
+            console.log('質問ID:', questionId);
+            console.log('現在の質問インデックス:', currentQuestionIndex);
+            console.log('回答配列:', answers);
+            console.log('質問配列:', questions);
+            console.log('質問配列の長さ:', questions.length);
+
+            // 同じ質問の他のオプションの選択を解除
+            const questionDiv = optionElement.parentElement.parentElement;
+            questionDiv.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+
+            // 選択されたオプションをハイライト
+            optionElement.classList.add('selected');
+
+            // 回答を保存
+            answers[questionId - 1] = optionIndex;
+            console.log('回答を保存:', answers);
+            console.log('回答済み数:', answers.filter(a => a !== null).length);
+
+            // 次の質問に進む（最後の質問でない場合）
+            if (currentQuestionIndex < questions.length - 1) {
+                const nextIndex = currentQuestionIndex + 1;
+                console.log('次の質問に進みます:', nextIndex);
+                console.log('次の質問のインデックス:', nextIndex);
+                console.log('次の質問のID:', questions[nextIndex].id);
+                console.log('次の質問のテキスト:', questions[nextIndex].question);
+                console.log('次の質問の順番:', nextIndex + 1);
+
+                // 次の質問を表示（インデックスベースで正しく進む）
+                setTimeout(() => {
+                    console.log('setTimeout 実行: showQuestion(', nextIndex, ')');
+                    showQuestion(nextIndex);
+                }, 500);
+            } else {
+                console.log('最後の質問です。すべて回答済みの状態にします。');
+                // 最後の質問の場合は、ボタンを有効にする
+                const submitBtn = document.getElementById('submit-btn');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'チェック結果を見る';
+            }
+
+            // 回答状態をチェック
+            checkAllAnswered();
+            console.log('=== selectOption 完了 ===');
+        }
+
+        function checkAllAnswered() {
+            const allAnswered = answers.every(answer => answer !== null);
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (allAnswered) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'チェック結果を見る';
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.textContent = `あと${questions.length - answers.filter(a => a !== null).length}問回答してください`;
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        function submitAnswers() {
+            if (answers.some(answer => answer === null)) {
+                alert('すべての質問に回答してください。');
+                return;
+            }
+
+            const answersData = answers.map((answer, index) => ({
+                questionId: index + 1,
+                optionIndex: answer
+            }));
+
+            fetch("/check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ answers: answersData })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    sessionStorage.setItem("type_info", JSON.stringify(data.type_info));
+                    window.location.href = "/result?result_type=" + encodeURIComponent(data.result_type);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('診断中にエラーが発生しました。');
+                });
+        }
+    </script>
+</body>
+
+</html>

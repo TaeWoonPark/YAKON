@@ -4,25 +4,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAKON(Your Active Knowledge Organic Nutrition) 腸活ナビ- 質問ページ</title>
+    <title>腸活タイプナビ - あなたの腸活スタイルを見つけよう</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .logo {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feature p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .start-btn:active {
+            transform: translateY(0);
+        }
+
+        .types-preview {
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .types-preview h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .type-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .type-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .type-item h4 {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .type-item p {
+            color: #7f8c8d;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-<h1>腸活ナビ 質問ページ</h1>
-</body>
+    <div class="container">
+        <div class="logo">🌱</div>
+        <h1>腸活タイプナビ</h1>
+        <p class="subtitle">
+            あなたの生活習慣や体調から、最適な腸活スタイルを見つけましょう。<br>
+            7つの簡単な質問で、あなたの腸活タイプをチェックします。
+        </p>
 
-<from method="POST" action="/result">
-    {% for q in questions %}
-    <div>
-        <p><strong>{{ q.ruestion }}</strong><p>
-        {% for option in q.options %} 
-        <label>
-            <input type="radio" name="q{{loop.index }}" value="{{ option.value}}" required>
-            {{ option.text }}
-        </label><br>
-        {% endfor %}
-        button type="submit">ナビする</button>
-    </form>
-<body>
+        <div class="features">
+            <div class="feature">
+                <h3>🔍 タイプチェック</h3>
+                <p>生活習慣から腸活タイプを判定</p>
+            </div>
+            <div class="feature">
+                <h3>💡 アドバイス</h3>
+                <p>タイプ別の具体的な改善方法</p>
+            </div>
+            <div class="feature">
+                <h3>🥗 食事提案</h3>
+                <p>腸に良い食材の紹介</p>
+            </div>
+        </div>
+
+        <button class="start-btn" onclick="startCheck()">チェックを始める</button>
+
+        <div class="types-preview">
+            <h3>チェックできる腸活タイプ</h3>
+            <div class="types-grid">
+                <div class="type-item">
+                    <h4>ストレス型</h4>
+                    <p>ストレスで腸の動きが悪くなりがち</p>
+                </div>
+                <div class="type-item">
+                    <h4>食生活型</h4>
+                    <p>偏った食生活で腸内環境が乱れがち</p>
+                </div>
+                <div class="type-item">
+                    <h4>運動不足型</h4>
+                    <p>運動不足で腸の蠕動運動が弱い</p>
+                </div>
+                <div class="type-item">
+                    <h4>睡眠不足型</h4>
+                    <p>睡眠不足で腸のリズムが乱れがち</p>
+                </div>
+                <div class="type-item">
+                    <h4>加齢型</h4>
+                    <p>加齢による腸の機能低下</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startCheck() {
+            window.location.href = '/questions';
+        }
+    </script>
+</body>
 
 </html>

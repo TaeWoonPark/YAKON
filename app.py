@@ -66,7 +66,7 @@ INTESTINE_TYPES = {
     },
 }
 
-# 診断質問
+# チェック質問
 QUESTIONS = [
     {
         "id": 1,
@@ -235,8 +235,8 @@ def questions():
     return render_template("questions.html", questions=QUESTIONS)
 
 
-@app.route("/diagnose", methods=["POST"])
-def diagnose():
+@app.route("/check", methods=["POST"])
+def check():
     data = request.get_json()
     answers = data.get("answers", [])
 
@@ -265,4 +265,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0", port=8080)

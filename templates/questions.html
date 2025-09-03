@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YAKON - 腸活タイプ診断</title>
+    <title>ヤーコンマン</title>
     <style>
         * {
             margin: 0;
@@ -192,7 +192,7 @@
     <div class="container">
         <div class="header">
             <h1>YAKON</h1>
-            <p style="margin-top: 10px; opacity: 0.9;">タイプ診断</p>
+            <p style="margin-top: 10px; opacity: 0.9;">ヤーコンマンが君タイプを見つけるよ！</p>
 
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
@@ -218,7 +218,7 @@
                 {% endfor %}
 
                 <button type="button" class="submit-btn" id="submit-btn" onclick="submitAnswers()" disabled>
-                    チェック結果を見る
+                    ヤーコンマンが君のタイプを教えてくれるよ！
                 </button>
             </form>
         </div>
@@ -333,7 +333,7 @@
                 // 最後の質問の場合は、ボタンを有効にする
                 const submitBtn = document.getElementById('submit-btn');
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'チェック結果を見る';
+                submitBtn.textContent = 'ヤーコンマンが君のタイプを教えてくれるよ！';
             }
 
             // 回答状態をチェック

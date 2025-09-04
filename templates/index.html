@@ -106,23 +106,9 @@
             position: absolute;
             top: 50px;
             left: 300px;
-        }
-
-        .start-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .start-btn:active {
-            transform: translateY(0);
-        }
-
-
-        .start-btn {
             display: block;
             margin: 0 auto;
             margin-top: 40px;
-
         }
 
         .types-preview {
@@ -178,9 +164,9 @@
                 text-align: center;
             }
 
-            
 
-           
+
+
 
             .logo {
                 font-size: 2rem;
@@ -199,7 +185,7 @@
                 padding: 14px 20px;
             }
 
-            
+
         }
     </style>
 </head>
@@ -235,12 +221,16 @@
             <p>地域の食文化や日々の食事にまつわる食材を楽しく紹介</p>
         </div>
 
- 
-                <script>
-                    function startCheck() {
-                        window.location.href = '/questions';
-                    }
-                </script>
-</body>
 
-</html>
+        <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const btn = document.querySelector(".start-btn");
+    if (btn) {
+      btn.addEventListener("click", startCheck);
+    }
+  });
+
+  function startCheck() {
+    window.location.href = '/questions';
+  }
+</script>

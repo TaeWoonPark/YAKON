@@ -184,6 +184,49 @@
             box-shadow: 0 10px 20px rgba(108, 117, 125, 0.3);
         }
 
+        .knowledge-grid,
+        .connection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .knowledge-item,
+        .connection-item {
+            background: #e3f2fd;
+            /* 薄いブルー */
+            color: #0d47a1;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+            text-align: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .knowledge-item:hover,
+        .connection-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .card-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
         @media (max-width: 768px) {
             .content {
                 padding: 20px;
@@ -234,6 +277,9 @@
             <div class="section">
                 <h3>💪 ヤーコンマンからの生活アドバイス</h3>
                 <ul class="advice-list" id="advice-list">
+                    {% for tip in data.advice %}
+                    <li>{{ tip }}</li>
+                    {% endfor %}
                     <!-- 生活習慣改善のヒントがここに表示されます -->
                 </ul>
             </div>
@@ -241,55 +287,61 @@
             <div class="section">
                 <h3>🥗 ヤーコンマンのすすめ食材</h3>
                 <div class="foods-grid" id="foods-list">
+                    {% for food in data.foods %}
+                    <div class="food-item">{{ food }}</div>
+                    {% endfor %}
                     <!-- 腸活に役立つ食材がここに表示されます -->
+                </div>
+                <div class="section">
+                
+
+                    </div>
+
+                    <div class="actions">
+                        <a href="/questions" class="btn">ヤーコンマンともう一度やってみよう！</a>
+                        <a href="/" class="btn btn-secondary">トップに戻る</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="actions">
-                <a href="/questions" class="btn">ヤーコンマンともう一度やってみよう！</a>
-                <a href="/" class="btn btn-secondary">トップに戻る</a>
-            </div>
-        </div>
-    </div>
+            <script>
+                // URLパラメータから結果タイプを取得
+                const urlParams = new URLSearchParams(window.location.search);
+                const resultType = urlParams.get('result_type');
 
-    <script>
-        // URLパラメータから結果タイプを取得
-        const urlParams = new URLSearchParams(window.location.search);
-        const resultType = urlParams.get('result_type');
+                // セッションストレージから詳細情報を取得
+                const typeInfo = JSON.parse(sessionStorage.getItem('type_info') || '{}');
 
-        // セッションストレージから詳細情報を取得
-        const typeInfo = JSON.parse(sessionStorage.getItem('type_info') || '{}');
+                if (resultType && typeInfo.description) {
+                    // 結果タイプを表示
+                    document.getElementById('result-type').textContent = resultType;
 
-        if (resultType && typeInfo.description) {
-            // 結果タイプを表示
-            document.getElementById('result-type').textContent = resultType;
+                    // タイプの説明を表示
+                    document.getElementById('type-description').textContent = typeInfo.description;
 
-            // タイプの説明を表示
-            document.getElementById('type-description').textContent = typeInfo.description;
+                    // 症状を表示
+                    const symptomsList = document.getElementById('symptoms-list');
+                    symptomsList.innerHTML = typeInfo.symptoms.map(symptom =>
+                        `<div class="symptom-item">${symptom}</div>`
+                    ).join('');
 
-            // 症状を表示
-            const symptomsList = document.getElementById('symptoms-list');
-            symptomsList.innerHTML = typeInfo.symptoms.map(symptom =>
-                `<div class="symptom-item">${symptom}</div>`
-            ).join('');
+                    // アドバイスを表示
+                    const adviceList = document.getElementById('advice-list');
+                    adviceList.innerHTML = typeInfo.advice.map(advice =>
+                        `<li>${advice}</li>`
+                    ).join('');
 
-            // アドバイスを表示
-            const adviceList = document.getElementById('advice-list');
-            adviceList.innerHTML = typeInfo.advice.map(advice =>
-                `<li>${advice}</li>`
-            ).join('');
-
-            // 食材を表示
-            const foodsList = document.getElementById('foods-list');
-            foodsList.innerHTML = typeInfo.foods.map(food =>
-                `<div class="food-item">${food}</div>`
-            ).join('');
-        } else {
-            // データがない場合はエラーメッセージを表示
-            document.getElementById('type-description').textContent = 'チェックデータが見つかりません。もう一度チェックを行ってください。';
-            document.querySelector('.actions').innerHTML = '<a href="/questions" class="btn">チェックを始める</a>';
-        }
-    </script>
+                    // 食材を表示
+                    const foodsList = document.getElementById('foods-list');
+                    foodsList.innerHTML = typeInfo.foods.map(food =>
+                        `<div class="food-item">${fc}</div>`
+                    ).join('');
+                } else {
+                    // データがない場合はエラーメッセージを表示
+                    document.getElementById('type-description').textContent = 'チェックデータが見つかりません。もう一度チェックを行ってください。';
+                    document.querySelector('.actions').innerHTML = '<a href="/questions" class="btn">チェックを始める</a>';
+                }
+            </script>
 </body>
 
 </html>

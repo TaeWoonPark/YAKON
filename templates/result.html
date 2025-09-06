@@ -277,9 +277,8 @@
             <div class="section">
                 <h3>💪 ヤーコンマンからの生活アドバイス</h3>
                 <ul class="advice-list" id="advice-list">
-                    {% for tip in data.advice %}
                     <li>{{ tip }}</li>
-                    {% endfor %}
+                    
                     <!-- 生活習慣改善のヒントがここに表示されます -->
                 </ul>
             </div>
@@ -287,61 +286,57 @@
             <div class="section">
                 <h3>🥗 ヤーコンマンのすすめ食材</h3>
                 <div class="foods-grid" id="foods-list">
-                    {% for food in data.foods %}
                     <div class="food-item">{{ food }}</div>
-                    {% endfor %}
+                
                     <!-- 腸活に役立つ食材がここに表示されます -->
                 </div>
-                <div class="section">
-                
 
-                    </div>
-
-                    <div class="actions">
-                        <a href="/questions" class="btn">ヤーコンマンともう一度やってみよう！</a>
-                        <a href="/" class="btn btn-secondary">トップに戻る</a>
-                    </div>
+                <div class="actions">
+                    <a href="questions" class="btn">ヤーコンマンともう一度やってみよう！</a>
+                                        <a href="/" class="btn btn-secondary">トップに戻る</a>
                 </div>
             </div>
+        </div>
 
-            <script>
-                // URLパラメータから結果タイプを取得
-                const urlParams = new URLSearchParams(window.location.search);
-                const resultType = urlParams.get('result_type');
+        <script>
+            // URLパラメータから結果タイプを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const resultType = urlParams.get('result_type');
 
-                // セッションストレージから詳細情報を取得
-                const typeInfo = JSON.parse(sessionStorage.getItem('type_info') || '{}');
 
-                if (resultType && typeInfo.description) {
-                    // 結果タイプを表示
-                    document.getElementById('result-type').textContent = resultType;
+            // セッションストレージから詳細情報を取得
+            const typeInfo = JSON.parse(sessionStorage.getItem('type_info') || '{}');
 
-                    // タイプの説明を表示
-                    document.getElementById('type-description').textContent = typeInfo.description;
+            if (resultType && typeInfo.description) {
+                // 結果タイプを表示
+                document.getElementById('result-type').textContent = resultType;
 
-                    // 症状を表示
-                    const symptomsList = document.getElementById('symptoms-list');
-                    symptomsList.innerHTML = typeInfo.symptoms.map(symptom =>
-                        `<div class="symptom-item">${symptom}</div>`
-                    ).join('');
+                // タイプの説明を表示
+                document.getElementById('type-description').textContent = typeInfo.description;
 
-                    // アドバイスを表示
-                    const adviceList = document.getElementById('advice-list');
-                    adviceList.innerHTML = typeInfo.advice.map(advice =>
-                        `<li>${advice}</li>`
-                    ).join('');
+                // 症状を表示
+                const symptomsList = document.getElementById('symptoms-list');
+                symptomsList.innerHTML = typeInfo.symptoms.map(symptom =>
+                    `<div class="symptom-item">${symptom}</div>`
+                ).join('');
 
-                    // 食材を表示
-                    const foodsList = document.getElementById('foods-list');
-                    foodsList.innerHTML = typeInfo.foods.map(food =>
-                        `<div class="food-item">${fc}</div>`
-                    ).join('');
-                } else {
-                    // データがない場合はエラーメッセージを表示
-                    document.getElementById('type-description').textContent = 'チェックデータが見つかりません。もう一度チェックを行ってください。';
-                    document.querySelector('.actions').innerHTML = '<a href="/questions" class="btn">チェックを始める</a>';
-                }
-            </script>
+                // アドバイスを表示
+                const adviceList = document.getElementById('advice-list');
+                adviceList.innerHTML = typeInfo.advice.map(advice =>
+                    `<li>${advice}</li>`
+                ).join('');
+
+                // 食材を表示
+                const foodsList = document.getElementById('foods-list');
+                foodsList.innerHTML = typeInfo.foods.map(food =>
+                    `<div class="food-item">${food}</div>`
+                ).join('');
+            } else {
+                // データがない場合はエラーメッセージを表示
+                document.getElementById('type-description').textContent = 'チェックデータが見つかりません。もう一度チェックを行ってください。';
+                document.querySelector('.actions').innerHTML = '<a href="/questions" class="btn">チェックを始める</a>';
+            }
+        </script>
 </body>
 
 </html>

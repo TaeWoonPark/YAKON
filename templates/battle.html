@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIRAIZUMI-YAKON_MAN 腸内バトル</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f0f8ff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #yakon-man {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        #enemy {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: red;
+        }
+
+        #beam {
+            display: none;
+            font-size: 3rem;
+            color: orange;
+            margin-bottom: 20px;
+        }
+
+        #result {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: green;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #fff;
+            background: #667eea;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>HIRAIZUMI-YAKON_MAN 腸内バトル！</h1>
+    <div id="yakon-man">🦸‍♂️</div>
+    <div id="enemy">🦠</div>
+    <div id="beam"></div>
+    <div id="result"></div>
+    <button id="attack-btn">攻撃！</button>
+
+    <!-- トップへ戻る -->
+    <a href="/" class="btn btn-secondary">トップへ戻る</a>
+
+    <script>
+        // URLからタイプを取得
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type') || 'A';
+        console.log("タイプ:", type); 
+        // タイプ別のバトルデータ
+        const battleData = {
+            "タイプA": { enemy: "悪玉菌A", attack: "ビーム", strategy: "酸性環境", outcome: "勝利！" },
+            "タイプB": { enemy: "悪玉菌B", attack: "ヨーグルトパンチ", strategy: "水分", outcome: "勝利！" },
+            "タイプC": { enemy: "ウイルス菌", attack: "ファイトキック", strategy: "免疫強化", outcome: "勝利！" }
+        };
+
+        // 選択タイプのデータを取得
+        const data = battleData[type];
+
+        // HTML 初期表示
+        document.getElementById('enemy').textContent = "🦠 " + data.enemy;
+        document.getElementById('beam').textContent = "✨" + data.attack + "✨";
+
+        // 攻撃ボタン処理
+        document.getElementById("attack-btn").addEventListener("click", function () {
+            const beam = document.getElementById("beam");
+            const result = document.getElementById("result");
+
+            beam.style.display = "block";
+
+            setTimeout(function () {
+                beam.style.display = "none";
+
+                // 弱点判定（必要に応じて変更可能）
+                const weakAttack = data.strategy === data.enemy;
+                const text = weakAttack
+                    ? "弱点攻撃！" + data.enemy + "に大ダメージ！"
+                    : data.attack + "で" + data.enemy + "にダメージ！";
+
+                result.textContent = text + " " + data.outcome;
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

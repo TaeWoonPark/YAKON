@@ -15,7 +15,7 @@ INTESTINE_TYPES = {
             "完璧を求めすぎない、80%でOKにする",
             "カフェインを控えめにする",
             "就寝前のホットミルクでリラックス",
-            "週末は完全に仕事を忘れる時間を作る"
+            "週末は完全に仕事を忘れる時間を作る",
         ],
         "foods": [
             "カモミールティー",
@@ -25,7 +25,7 @@ INTESTINE_TYPES = {
             "ナッツ",
             "ダークチョコレート",
             "ヤーコン",
-            "菊芋"
+            "菊芋",
         ],
     },
     "神経刺激過敏傾向型": {
@@ -39,18 +39,9 @@ INTESTINE_TYPES = {
             "朝日を10分間浴びる",
             "デジタルデトックス日を週1回設ける",
             "寝る前の読書でリラックス",
-            "1時間ごとに5分の休憩を取る"
+            "1時間ごとに5分の休憩を取る",
         ],
-        "foods": [
-            "ブルーベリー",
-            "ほうれん草",
-            "サーモン",
-            "卵",
-            "アーモンド",
-            "緑茶",
-            "ヤーコン",
-            "チコリ"
-        ]
+        "foods": ["ブルーベリー", "ほうれん草", "サーモン", "卵", "アーモンド", "緑茶", "ヤーコン", "チコリ"],
     },
     "代謝停滞傾向型": {
         "description": "運動不足や長時間の座位により、腸の蠕動運動や代謝活動が低下しやすい傾向があります。腸内の循環が滞ることで、老廃物の排出や栄養吸収に影響が出ることがあります。",
@@ -63,19 +54,9 @@ INTESTINE_TYPES = {
             "エレベーターの代わりに階段を使う",
             "座りながらできる腹筋運動を1日3回",
             "ストレッチを朝晩5分ずつ",
-            "週末は必ず外に出て運動する"
+            "週末は必ず外に出て運動する",
         ],
-        "foods": [
-            "玄米",
-            "キムチ",
-            "納豆",
-            "海藻",
-            "きのこ",
-            "生姜",
-            "にんにく",
-            "ヤーコン",
-            "ごぼう"
-        ]
+        "foods": ["玄米", "キムチ", "納豆", "海藻", "きのこ", "生姜", "にんにく", "ヤーコン", "ごぼう"],
     },
     "栄養バランス偏り傾向型": {
         "description": "食生活が偏りがちな方は、腸内細菌の構成が不安定になりやすく、消化や免疫に影響が出やすい傾向があります。特に食物繊維の不足が腸内環境に影響することがあります。",
@@ -88,7 +69,7 @@ INTESTINE_TYPES = {
             "食物繊維を意識的に摂取",
             "発酵食品を毎食1品は食べる",
             "水分を1日2L以上摂取",
-            "食事は30分以上かけてゆっくり食べる"
+            "食事は30分以上かけてゆっくり食べる",
         ],
         "foods": [
             "キムチ",
@@ -101,8 +82,8 @@ INTESTINE_TYPES = {
             "海藻",
             "ヤーコン",
             "菊芋",
-            "チコリ"
-        ]
+            "チコリ",
+        ],
     },
     "リズム不安定傾向型": {
         "description": "睡眠不足や生活リズムの乱れが続くと、腸内細菌の活動リズムにも影響が出やすく、腸内環境が不安定になりやすい傾向があります。",
@@ -115,7 +96,7 @@ INTESTINE_TYPES = {
             "就寝前のスマホ・PC使用を控える",
             "朝日を浴びる",
             "就寝前のカフェインを避ける",
-            "リラックスできる就寝ルーティンを作る"
+            "リラックスできる就寝ルーティンを作る",
         ],
         "foods": [
             "バナナ",
@@ -126,8 +107,8 @@ INTESTINE_TYPES = {
             "サーモン",
             "卵",
             "ヤーコン",
-            "菊芋"
-        ]
+            "菊芋",
+        ],
     },
     "活性低下傾向型": {
         "description": "加齢や筋力低下により、腸の動きや腸内細菌の活性が弱まりやすく、消化や免疫の働きに影響が出やすい傾向があります。",
@@ -140,7 +121,7 @@ INTESTINE_TYPES = {
             "水分を十分に摂取（1日2L以上）",
             "食物繊維を意識的に摂る",
             "発酵食品で腸内環境を整える",
-            "定期的な健康診断を受ける"
+            "定期的な健康診断を受ける",
         ],
         "foods": [
             "ヨーグルト",
@@ -153,8 +134,8 @@ INTESTINE_TYPES = {
             "玄米",
             "ヤーコン",
             "菊芋",
-            "ごぼう"
-        ]
+            "ごぼう",
+        ],
     },
     "腸内バランス崩れ傾向型": {
         "description": "複数の生活習慣要因が重なることで、腸内細菌のバランスが乱れやすく、腸内環境が不安定になりやすい傾向があります。",
@@ -166,7 +147,7 @@ INTESTINE_TYPES = {
             "発酵食品を毎食食べる",
             "砂糖と人工甘味料を控える",
             "抗生物質使用後は特に注意",
-            "腸内環境を整える食材を積極的に摂る"
+            "腸内環境を整える食材を積極的に摂る",
         ],
         "foods": [
             "キムチ",
@@ -182,10 +163,10 @@ INTESTINE_TYPES = {
             "菊芋",
             "チコリ",
             "ごぼう",
-            "玉ねぎ"
-        ]
-    }
-    }
+            "玉ねぎ",
+        ],
+    },
+}
 # チェック質問
 QUESTIONS = [
     {
@@ -223,7 +204,7 @@ QUESTIONS = [
                     "神経刺激過敏傾向型": 1,
                     "代謝停滞傾向型": 1,
                     "栄養バランス偏り傾向型": 1,
-                    "リズム不安定稽傾向型": 1,
+                    "リズム不安定傾向型": 1,
                     "活性低下傾向型": 0,
                     "腸内バランス崩れ傾向型": 1,
                 },
@@ -536,7 +517,7 @@ QUESTIONS = [
                     "代謝停滞傾向型": 1,
                     "栄養バランス崩れ傾向型": 1,
                     "リズム不安定傾向型": 0,
-                    "活性低下型": 0,
+                    "活性低下傾向型": 0,
                     "腸内バランス崩れ傾向型": 1,
                 },
             },
@@ -628,6 +609,44 @@ def index():
     return render_template("index.html")
 
 
+#@app.route("/battle")
+#def battle():
+    #battle_type = request.args.get("type", "A")  # デフォルトはタイプA
+    #if battle_type == "タイプA":
+        #enemy = "悪玉菌A"
+        #enemy_weak = "酸性環境"
+        #strategy = "ビーム"
+        #outcome = "勝利！"
+    #elif battle_type == "タイプB":
+        #enemy = "悪玉菌B"
+        #enemy_weak = "水分"
+        #strategy = "ヨーグルトパンチ"
+        #outcome = "勝利！"
+    #else:
+        #enemy = "ウイルス菌"
+        #enemy_weak = "免疫強化"
+        #strategy = "ファイトキック"
+        #outcome = "勝利！"
+
+    #return render_template(
+        #"batlle.html",
+        #result_type=battle_type,
+        #enemy=enemy,
+        #enemy_weak=enemy_weak,
+        #strategy=strategy,
+        #attack=strategy,
+        #outcome=outcome,
+    #)
+
+
+@app.route("/submit", methods=["POST"])
+def submit():
+    answers = request.json
+    # スコア計算処理
+    result = calculate_result(answers)
+    return jsonify(result)
+
+
 @app.route("/questions")
 def questions():
     return render_template("questions.html", questions=QUESTIONS)
@@ -662,8 +681,26 @@ def result_page():
     user_type = request.args.get("result_type")
     data = INTESTINE_TYPES.get(user_type)
     if not data:
-        return "診断結果が見つかりません", 404
+        return "診断結果が見つかりません", 404  
     return render_template("result.html", type_name=user_type, data=data)
+
+
+def calculate_result(answers):
+    total_scores = {k: 0 for k in INTESTINE_TYPES.keys()}
+    for qid, selected_option_index in answers.items():
+        option = QUESTIONS[qid - 1]["options"][selected_option_index]
+        for k, v in option["scores"].items():
+            if k in total_scores:
+                total_scores[k] += v
+            else:
+                print(f"Warning: 未知の腸活タイプ {k}")
+    # スコアが最大のタイプを返す
+    top_type = max(total_scores, key=total_scores.get)
+    return {
+        "top_type": top_type,
+        "scores": total_scores,
+        "description": INTESTINE_TYPES[top_type]["description"],
+    }
 
 
 if __name__ == "__main__":
